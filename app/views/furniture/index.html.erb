@@ -1,3 +1,30 @@
+<div class="dropdown is-hoverable ml-6 mt-6">
+  <div class="dropdown-trigger">
+    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+      <span>FILTER BY</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+    <div class="dropdown-content">
+      <div class="dropdown-item">
+        <%= form_tag(categories_path, method: :get) do %>
+          <%= text_field_tag(:filter, params[:filter]) %>
+          <input class="button is-info is-outlined ml-3" type="submit" value="Filter">
+        <% end %>
+      </div>
+
+      <%# <a href="#" class="dropdown-item">
+        New
+      </a> %>
+      <a href="#" class="dropdown-item">
+        Recently Updated
+      </a>
+    </div>
+  </div>
+</div>
 
 <div class="columns is-multiline is-centered ml-6 mr-6 mt-6">
   <%= render partial: 'furniture',
