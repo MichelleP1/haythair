@@ -1,0 +1,60 @@
+<% if show_details %>
+  <div class="tile is-ancestor is-4 m-6 is-centered">
+<% else %>
+  <div class="tile is-ancestor is-2 ml-3 mr-3">
+<% end %>
+  <div class="tile is-parent is-12 is-danger is-centered">
+    <article class="tile is-child is-12 box is-white is-centered">
+      <% if furniture.image.present? %>
+        <figure class="image" >
+          <%= image_tag furniture.image %>
+        </figure>
+      <% end %>
+      <div>
+        <p class="is-capitalized is-size-4 is-black">
+          <% if show_link %>
+            <%= link_to furniture.title, furniture %>
+          <% else %>
+            <%= furniture.title %>
+          <% end %>
+        </p>
+      </div>
+      <div>
+        <p class="is-size-3 has-text-danger mt-3">
+            $<%= furniture.price %>
+        </p>
+      </div>
+      <% if show_details %>
+        <div>
+          <p class="is-size-8 mt-3">
+              <%= furniture.description %>
+          </p>
+        </div>
+      <% end %>
+      <% if show_details %>
+        <div>
+          <p class="is-size-8 mt-4">
+            Weight:
+            <%= furniture.weight %>lbs
+          </p>
+        </div>
+      <% end %>
+      <% if show_details %>
+        <div>
+          <p class="is-size-8 mt-2">
+            Stock:
+            <%= furniture.stock %>
+          </p>
+        </div>
+      <% end %>
+      <% if show_details %>
+        <div>
+          <p class="is-size-8 is-capitalized mt-2">
+              Category:
+              <%= furniture.category.title %>
+          </p>
+        </div>
+      <% end %>
+    </article>
+  </div>
+</div>

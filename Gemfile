@@ -60,3 +60,10 @@ gem 'activeadmin'
 gem 'devise'
 
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+gem "aws-sdk-s3", require: false
+
+gem "bulma-rails", "~> 0.8.0"
+
+# For pagination
+gem 'kaminari'
