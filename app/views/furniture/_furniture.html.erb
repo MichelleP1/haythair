@@ -1,10 +1,10 @@
 <% if show_details %>
-  <div class="tile is-ancestor is-4 m-6 is-centered">
+  <div class="tile is-ancestor is-4 m-6 is-centered ">
 <% else %>
   <div class="tile is-ancestor is-2 ml-3 mr-3">
 <% end %>
   <div class="tile is-parent is-12 is-danger is-centered">
-    <article class="tile is-child is-12 box is-white is-centered">
+    <article class="tile is-child is-12 box is-white is-centered has-background-link-light">
       <% if furniture.image.present? %>
         <figure class="image" >
           <%= image_tag furniture.image %>
@@ -20,7 +20,7 @@
         </p>
       </div>
       <div>
-        <p class="is-size-3 has-text-danger mt-3">
+        <p class="is-size-3 mt-3">
             $<%= furniture.price %>
         </p>
       </div>
@@ -55,6 +55,18 @@
           </p>
         </div>
       <% end %>
+      <div>
+      <% if cart.include?(furniture) %>
+        <%= button_to cart_path(furniture), method: :delete do %>
+          Remove From cart
+        <% end %>
+      <% else %>
+        <%= form_with url: cart_index_path, method: :post do %>
+          <%= hidden_field_tag(:id, furniture.id) %>
+          <%= button_tag 'Add to Cart' %>
+        <% end %>
+      <% end %>
+      </div>
     </article>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+<nav class="navbar has-background-link-light" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -13,7 +13,47 @@
       <a class="navbar-item has-text-weight-bold is-size-2" href="/">
         Haythair Furniture
       </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Categories
+        </a>
 
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            About
+          </a>
+          <a class="navbar-item">
+            Jobs
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
+          </a>
+        </div>
+      </div>
+
+      <nav>
+        <li></li><%= link_to image_tag("cart.png", width:60), root_path %></li>
+        <ul>
+          <li>
+            Cart
+            <% if cart.present? %>
+              <sup><%= cart.size %></sup>
+              <ul>
+                <% cart.each do |furniture| %>
+                  <li>
+                    <%= furniture.title %> <%= link_to '-', cart_path(furniture), method: :delete %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </li>
+        </ul>
+      </nav>
 
     </div>
   </div>
