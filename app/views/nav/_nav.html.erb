@@ -18,27 +18,20 @@
           Categories
         </a>
 
-
         <div class="navbar-dropdown">
-          <a class="navbar-item">
-            About
-          </a>
-          <a class="navbar-item">
-            Jobs
-          </a>
-          <a class="navbar-item">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
-          </a>
+          <% get_categories.each do |f| %>
+            <div id=<%= "box#{f.id}" -%> >
+            <a class="navbar-item">
+              <%= link_to f.title, f %>
+            </a>
+            </div>
+          <% end %>
         </div>
       </div>
 
-      <nav>
-        <li></li><%= link_to image_tag("cart.png", width:60), root_path %></li>
+      <div>
         <ul>
+          </li><%= link_to image_tag("cart.png", width:60), root_path %></li>
           <li>
             Cart
             <% if cart.present? %>
@@ -53,8 +46,7 @@
             <% end %>
           </li>
         </ul>
-      </nav>
-
+      </div>
     </div>
   </div>
 </nav>

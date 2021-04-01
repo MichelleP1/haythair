@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
   def get_categories
-    Categories.all
+    @categories = Category.all
   end
 
   def initialize_session
