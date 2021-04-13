@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
+  get 'furnitures/index'
+  get 'furnitures/show'
   # get 'categories/index'
   # get 'categories/show'
   # get 'furniture/index'
@@ -11,9 +14,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :furniture, only: %i[index show]
+  resources :furnitures, only: %i[index show]
   resources :categories, only: %i[index show]
   resources :cart, only: %i[create destroy]
 
-  root to: "furniture#index"
+  root to: "furnitures#index"
 end

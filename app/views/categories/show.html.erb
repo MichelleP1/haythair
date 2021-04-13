@@ -1,7 +1,7 @@
 <h1 class="columns title is-4 is-capitalized is-centered m-6"><%= @category.title %></h1>
 
 <div class="columns is-multiline is-centered">
-  <%= render partial: 'furniture/furniture',
+  <%= render partial: 'furnitures/furniture',
              collection: @category.furniture,
              locals: { show_link: true, show_details: false } %>
 </div>

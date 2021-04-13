@@ -10,7 +10,7 @@
   <div class="dropdown-menu" id="dropdown-menu3" role="menu">
     <div class="dropdown-content">
       <div class="dropdown-item">
-        <%= form_tag(categories_path, method: :get) do %>
+        <%= form_tag(furnitures_path, method: :get) do %>
           <%= text_field_tag(:filter, params[:filter]) %>
           <input class="button is-info is-outlined ml-3" type="submit" value="Filter">
         <% end %>
