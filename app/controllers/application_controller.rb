@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  protect_from_forgery with: :exception
+  # before_action :authenticate_user!
   before_action :initialize_session
+  before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :cart, :get_categories
 
   protected
@@ -23,6 +25,7 @@ class ApplicationController < ActionController::Base
 
   def initialize_session
     session[:shopping_cart] ||= []
+    session[:shopping_cart]
   end
 
   def cart
