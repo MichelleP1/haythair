@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'checkouts/show'
   devise_for :users
   get 'furnitures/index'
   get 'furnitures/show'
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
   resources :furnitures, only: %i[index show]
   resources :categories, only: %i[index show]
   resources :cart, only: %i[create destroy]
+  resources :order_items
+  resource :checkouts, only:[:show]
 
   root to: "furnitures#index"
 end

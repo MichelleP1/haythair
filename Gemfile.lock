@@ -295,6 +295,7 @@ DEPENDENCIES
   devise
   faker!
   jbuilder (~> 2.7)
+  jquery-rails (~> 4.1, >= 4.1.1)
   kaminari
   listen (~> 3.3)
   puma (~> 5.0)

@@ -67,3 +67,5 @@ gem "bulma-rails", "~> 0.8.0"
 
 # For pagination
 gem 'kaminari'
+
+gem 'jquery-rails', '~> 4.1', '>= 4.1.1'

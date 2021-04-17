@@ -26,6 +26,10 @@
   </div>
 </div>
 
+<div id="checkout">
+  <%= render 'checkouts/checkout' %>
+</div>
+
 <div class="columns is-multiline is-centered ml-6 mr-6 mt-6">
   <%= render partial: 'furniture',
              collection: @furniture,
@@ -33,6 +37,8 @@
 </div>
 
 
+
 <div class="columns is-centered m-6">
   <%= paginate @furniture %>
 </div>
+

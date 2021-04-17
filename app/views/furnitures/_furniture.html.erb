@@ -56,17 +56,15 @@
         </div>
       <% end %>
       <div>
-      <% if cart.include?(furniture) %>
-        <%= button_to cart_path(furniture), method: :delete do %>
-          Remove From cart
+        <%= form_for @order_item, remote: true do |f| %>
+        <%= f.hidden_field :furniture_id, :value => furniture.id %>
+        <%= f.number_field :quantity, :value => 1, :min => 1%>
+        <%= f.submit "Add to Cart" %>
+
         <% end %>
-      <% else %>
-        <%= form_with url: cart_index_path, method: :post do %>
-          <%= hidden_field_tag(:id, furniture.id) %>
-          <%= button_tag 'Add to Cart' %>
-        <% end %>
-      <% end %>
       </div>
     </article>
   </div>
 </div>
+
+

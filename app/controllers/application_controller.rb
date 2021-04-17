@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  include ApplicationHelper
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :authenticate_user!
   before_action :initialize_session
   helper_method :cart, :get_categories
 
