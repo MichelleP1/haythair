@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :initialize_session
   helper_method :cart, :get_categories
 
@@ -26,6 +26,13 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-    Furniture.find(session[:shopping_cart])
+    #Furniture.find(session[:shopping_cart])
+    shopping_cart = []
+    session[:shopping_cart].each do |furniture|
+      furnitureID = furniture[0]
+      shopping_cart << [furnitureID, furniture[1]]
+    end
+
+    shopping_cart
   end
 end

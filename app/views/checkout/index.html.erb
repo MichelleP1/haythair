@@ -1,0 +1,26 @@
+<% cart %>
+<% session[:cart] %>
+
+<% if cart.present? %>
+<h1>Your Order</h1>
+
+<% cart.each do |furniture| %>
+  <%= form_with url: cart_path(Furniture.find(furniture[0]).id, :quantity), method: :put do %>
+    <h2>
+      <%= Furniture.find(furniture[0]).title %> -
+      $<%= Furniture.find(furniture[0]).price * furniture[1] %>
+      <%= number_field_tag :quantity, value = furniture[1] %>
+      <%= button_tag 'Update' %>
+    </h2>
+  <% end %>
+
+  <%= button_to cart_path(Furniture.find(furniture[0]).id), method: :delete do %>
+    Remove
+  <% end %>
+
+<% end %>
+
+
+<% else %>
+  <h2>Your cart is empty.</h2>
+<% end %>
