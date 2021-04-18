@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
+<<<<<<< Updated upstream
   before_action :authenticate_user!
+=======
+  # before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+>>>>>>> Stashed changes
   before_action :initialize_session
-  helper_method :cart, :get_categories
+  helper_method :cart, :get_categories, :subtotal, :pst, :hst, :gst
 
   protected
   def configure_permitted_parameters
@@ -21,6 +26,8 @@ class ApplicationController < ActionController::Base
     @categories = Category.all
   end
 
+
+
   def initialize_session
     session[:shopping_cart] ||= []
   end
@@ -28,4 +35,27 @@ class ApplicationController < ActionController::Base
   def cart
     Furniture.find(session[:shopping_cart])
   end
+
+  def subtotal
+    subtotal = 0
+    session[:shopping_cart].each do |furniture|
+      price = Furniture.find(furniture[0]).price
+      subtotal += price
+    end
+
+    subtotal
+  end
+
+  def pst
+    pst = Province.find(User.find(current_user.id).province_id).pst * 0.01
+  end
+
+  def hst
+    hst = Province.find(User.find(current_user.id).province_id).hst * 0.01
+  end
+
+  def gst
+    gst = Province.find(User.find(current_user.id).province_id).gst * 0.01
+  end
+
 end

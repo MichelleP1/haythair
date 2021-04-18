@@ -1,4 +1,9 @@
 class CartController < ApplicationController
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
   def create
     logger.debug("Adding")
     id = params[:id].to_i

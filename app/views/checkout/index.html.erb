@@ -1,0 +1,50 @@
+
+<% cart %>
+<% session[:cart] %>
+
+<% if @province.present? %>
+<%= form_with(model: @order) do |f| %>
+
+
+  <div class="field">
+    <%= f.label :province %><br />
+    <%= f.collection_select :province_id, Province.all, :id, :code, { :prompt => 'Select a Province' }, {class: 'form-control' } %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+<% end %>
+
+<% if cart.present? %>
+<h1>Your Order</h1>
+<%= pst %>
+
+
+<% cart.each do |furniture| %>
+  <%= form_with url: cart_path(Furniture.find(furniture[0]).id, :quantity), method: :put do %>
+    <h2>
+      <%= Furniture.find(furniture[0]).title %> -
+      $<%= Furniture.find(furniture[0]).price * furniture[1] %>
+      <%= number_field_tag :quantity, value = furniture[1] %>
+      <%= button_tag 'Update' %>
+    </h2>
+  <% end %>
+
+  <%= button_to cart_path(Furniture.find(furniture[0]).id), method: :delete do %>
+    Remove
+  <% end %>
+<% end %>
+
+<h2>Subtotal: $<%= subtotal.round(2) %></h2>
+<h2>PST: $<%= (subtotal * pst).round(2) %></h2>
+<h2>HST: $<%= (subtotal * hst).round(2) %></h2>
+<h2>GST: $<%= (subtotal * gst).round(2) %></h2>
+<h2>Total: $<%= (subtotal + (subtotal * pst) + (subtotal * hst) + (subtotal * gst)).round(2) %></h2>
+
+
+
+<% else %>
+  <h2>Your cart is empty.</h2>
+<% end %>
