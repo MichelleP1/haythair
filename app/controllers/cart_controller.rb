@@ -1,5 +1,6 @@
 class CartController < ApplicationController
 
+
   def create
     logger.debug("Adding")
     id = params[:id].to_i
