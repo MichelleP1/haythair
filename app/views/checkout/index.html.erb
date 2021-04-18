@@ -43,6 +43,7 @@
 <h2>GST: $<%= (subtotal * gst).round(2) %></h2>
 <h2>Total: $<%= (subtotal + (subtotal * pst) + (subtotal * hst) + (subtotal * gst)).round(2) %></h2>
 
+<td><%= button_to 'Submit Order' ,{:controller => 'orders', :action => 'create', :user_id => User.find(current_user.id).id}, {:method => :post} %></td>
 
 
 <% else %>
