@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'users/create'
+  get 'users/update'
+  get 'order_items/create'
+  get 'order_items/update'
+  get 'order_items/delete'
   get 'orders/index'
   get 'orders/show'
   get 'checkout/index'
@@ -23,6 +28,8 @@ Rails.application.routes.draw do
   resources :cart, only: %i[create update destroy quantityIncrease quantityDecrease]
   resources :checkout
   resources :orders, only: %i[create]
+  resources :order_items, only: %i[create]
+  resources :users, only: %i[create, update]
 
   root to: "furnitures#index"
 end

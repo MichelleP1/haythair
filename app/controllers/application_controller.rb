@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   def subtotal
     subtotal = 0
     session[:shopping_cart].each do |furniture|
-      price = Furniture.find(furniture[0]).price
+      price = Furniture.find(furniture[0]).price * furniture[1]
       subtotal += price
     end
 

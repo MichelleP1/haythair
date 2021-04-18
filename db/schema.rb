@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_18_013604) do
+ActiveRecord::Schema.define(version: 2021_04_18_191849) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -86,16 +86,16 @@ ActiveRecord::Schema.define(version: 2021_04_18_013604) do
 
   create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
-    t.integer "order_id"
-    t.decimal "total"
-    t.decimal "unit_price"
+    t.decimal "price"
+    t.integer "furniture_id", null: false
+    t.integer "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "furniture_id"
+    t.index ["furniture_id"], name: "index_order_items_on_furniture_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.date "date"
     t.decimal "pst"
     t.decimal "hst"
     t.decimal "gst"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2021_04_18_013604) do
     t.string "address"
     t.string "postal"
     t.string "city"
-    t.integer "province_id", null: false
+    t.integer "province_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["province_id"], name: "index_users_on_province_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 2021_04_18_013604) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "furnitures", "categories"
+  add_foreign_key "order_items", "furnitures"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "users", "provinces"
 end

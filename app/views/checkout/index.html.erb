@@ -2,24 +2,8 @@
 <% cart %>
 <% session[:cart] %>
 
-<% if @province.present? %>
-<%= form_with(model: @order) do |f| %>
-
-
-  <div class="field">
-    <%= f.label :province %><br />
-    <%= f.collection_select :province_id, Province.all, :id, :code, { :prompt => 'Select a Province' }, {class: 'form-control' } %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-<% end %>
-
 <% if cart.present? %>
 <h1>Your Order</h1>
-<%= pst %>
 
 
 <% cart.each do |furniture| %>
@@ -37,14 +21,45 @@
   <% end %>
 <% end %>
 
-<h2>Subtotal: $<%= subtotal.round(2) %></h2>
-<h2>PST: $<%= (subtotal * pst).round(2) %></h2>
-<h2>HST: $<%= (subtotal * hst).round(2) %></h2>
-<h2>GST: $<%= (subtotal * gst).round(2) %></h2>
-<h2>Total: $<%= (subtotal + (subtotal * pst) + (subtotal * hst) + (subtotal * gst)).round(2) %></h2>
+<% if !@province.present? %>
+  <h2>Please enter your address before submitting your order</h2>
 
-<td><%= button_to 'Submit Order' ,{:controller => 'orders', :action => 'create', :user_id => User.find(current_user.id).id}, {:method => :post} %></td>
+    <%= form_with url: user_path(current_user.id, :id, :address, :postal, :city), method: :put do |f| %>
 
+      <div class="field">
+        <%= f.label :address %><br />
+        <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :postal %><br />
+        <%= f.text_field :postal, autofocus: true, autocomplete: "postal" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :city %><br />
+        <%= f.text_field :city, autofocus: true, autocomplete: "city" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :province %><br />
+        <%= f.collection_select :province_id, Province.all, :id, :code, { :prompt => 'Select a Province' }, {class: 'form-control' } %>
+      </div>
+
+      <%= button_tag 'Update' %>
+    <% end %>
+
+  <% else %>
+
+    <h2>Subtotal: $<%= subtotal.round(2) %></h2>
+    <h2>PST: $<%= (subtotal * pst).round(2) %></h2>
+    <h2>HST: $<%= (subtotal * hst).round(2) %></h2>
+    <h2>GST: $<%= (subtotal * gst).round(2) %></h2>
+    <h2>Total: $<%= (subtotal + (subtotal * pst) + (subtotal * hst) + (subtotal * gst)).round(2) %></h2>
+
+    <td><%= button_to 'Submit Order' ,{:controller => 'orders', :action => 'create', :user_id => User.find(current_user.id).id, :pst => pst, :hst => hst, :gst => gst}, {:method => :post} %></td>
+
+<% end %>
 
 <% else %>
   <h2>Your cart is empty.</h2>
