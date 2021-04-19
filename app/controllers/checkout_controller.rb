@@ -5,9 +5,6 @@ class CheckoutController < ApplicationController
     @province = User.find(current_user.id).province_id
   end
 
-  def show
-  end
-
   def create
 
     list_items_array = []
@@ -38,7 +35,7 @@ class CheckoutController < ApplicationController
     # Establish a connection with Stripe and then redirect the user to the payment screen.
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ["card"],
-      success_url:          checkout_success_url,
+      success_url:          checkout_success_url + "?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:           checkout_cancel_url,
       line_items:           list_items_array
     )
@@ -51,6 +48,11 @@ class CheckoutController < ApplicationController
 
   def success
     # We took the customer's money!
+    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    #@payment_intent_id = Stripe::PaymentIntent.retrieve(@session.payment_intent.id)
+    # @payment_amount_received = Stripe::PaymentIntent.retrieve(@session.payment_intent.original_values.payment_amount_received)
+    # @payment_paid = Stripe::PaymentIntent.retrieve(@session.payment_intent.original_values.charges.data.paid)
   end
 
   def cancel

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :furnitures, only: %i[index show]
   resources :categories, only: %i[index show]
   resources :cart, only: %i[create update destroy quantityIncrease quantityDecrease]
-  resources :checkout
+  # resources :checkout
   resources :orders, only: %i[create]
   resources :order_items, only: %i[create]
   resources :users, only: %i[create, update]

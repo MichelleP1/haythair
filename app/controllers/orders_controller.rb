@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
 
   def create
     @user = current_user
-    @order = Order.new(user_id: @user.id, pst: Province.find(@user.province_id).pst, hst: Province.find(@user.province_id).hst, gst: Province.find(@user.province_id).gst)
+    @order = Order.new(user_id: @user.id, pst: Province.find(@user.province_id).pst, hst: Province.find(@user.province_id).hst, gst: Province.find(@user.province_id).gst, :payment_id => params[:payment_id], :payment_paid => params[:payment_paid])
     @order.save
     # logger.debug(params[:order_id])
     redirect_to order_items_create_path(order_id: @order.id, pst: @order.pst, hst: @order.hst, gst: @order.gst)
@@ -23,6 +23,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:user_id, :pst, :hst, :gst)
+    params.permit(:payment_id, :payment_paid)
   end
 end

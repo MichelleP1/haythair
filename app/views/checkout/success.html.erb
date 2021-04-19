@@ -1,2 +1,8 @@
-<p>Thanks for your purchase, processing your order</p>
+<p>Payment sucessful! Please press continue to finalize your order.</p>
 
+<h3><%= @payment_intent.id %></h3>
+<h1>---------------------------------------------------------------</h1>
+<h3><%= @payment_intent.charges.data[0].paid %></h3>
+<h1>---------------------------------------------------------------</h1>
+
+<%= button_to "Continue", { :controller => "orders", :action => "create", :payment_id => @payment_intent.id, :payment_paid => @payment_intent.charges.data[0].paid} %>
