@@ -57,7 +57,7 @@
     <h2>GST: $<%= (subtotal * gst).round(2) %></h2>
     <h2>Total: $<%= (subtotal + (subtotal * pst) + (subtotal * hst) + (subtotal * gst)).round(2) %></h2>
 
-    <td><%= button_to 'Submit Order' ,{:controller => 'orders', :action => 'create', :user_id => User.find(current_user.id).id, :pst => pst, :hst => hst, :gst => gst}, {:method => :post} %></td>
+    <td><%= button_to 'Submit Order' ,{:controller => 'checkout', :action => 'create', :user_id => User.find(current_user.id).id, :pst => pst, :hst => hst, :gst => gst}, {:method => :post, :remote => true} %></td>
 
 <% end %>
 

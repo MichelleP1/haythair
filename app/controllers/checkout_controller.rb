@@ -17,12 +17,15 @@ class CheckoutController < ApplicationController
     #   return
     # end
 
-    @order_id = :order_id
-    @order_items = @order_id
+    @order_id = 76
+    @order = Order.find(@order_id)
+    @order_items = @order.order_items
+
 
     list_items_array = []
 
     @order_items.each do |item|
+      logger.debug(item.furniture_id)
       list_items_array << {name: "Test", amount: 123.00, currency: "cad", quantity: 1}
     end
 
@@ -31,7 +34,22 @@ class CheckoutController < ApplicationController
       payment_method_types: ["card"],
       success_url:          checkout_success_url,
       cancel_url:           checkout_cancel_url,
-      line_items:           list_items_array
+      line_items:           [
+        {
+          name:        "TEST",
+          description: "TEST",
+          amount:      1212,
+          currency:    "cad",
+          quantity:    1
+        },
+        {
+          name:        "GST",
+          description: "Goods and Services Tax",
+          amount:      1221,
+          currency:    "cad",
+          quantity:    1
+        }
+      ]
     )
 
     # ensure it formats the response as .js instead of .html:
@@ -48,6 +66,9 @@ class CheckoutController < ApplicationController
     # Something went wrong with the payment :(
   end
 
+  def checkout_params
+    params.permit(:order_id, :pst, :hst, :gst)
+  end
 
 end
 
@@ -72,4 +93,12 @@ end
 #       quantity:    1
 #     }
 #   ]
+# )
+
+
+# @session = Stripe::Checkout::Session.create(
+#   payment_method_types: ["card"],
+#   success_url:          checkout_success_url,
+#   cancel_url:           checkout_cancel_url,
+#   line_items:           list_items_array
 # )
