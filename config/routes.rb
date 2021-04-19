@@ -31,5 +31,11 @@ Rails.application.routes.draw do
   resources :order_items, only: %i[create]
   resources :users, only: %i[create, update]
 
+  scope "/checkout" do
+    post "create", to: "checkout#create", as: "checkout_create"
+    get "success", to: "checkout#success", as: "checkout_success"
+    get "cancel", to: "checkout#cancel", as: "checkout_cancel"
+  end
+
   root to: "furnitures#index"
 end

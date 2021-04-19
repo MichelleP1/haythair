@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.save
     logger.debug(params[:order_id])
-    redirect_to order_items_create_path(order_id: @order.id)
+    redirect_to order_items_create_path(order_id: @order.id, pst: @order.pst, hst: @order.hst, gst: @order.gst)
   end
 
   def update
