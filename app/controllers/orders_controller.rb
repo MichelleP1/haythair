@@ -6,9 +6,10 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    @user = current_user
+    @order = Order.new(user_id: @user.id, pst: Province.find(@user.province_id).pst, hst: Province.find(@user.province_id).hst, gst: Province.find(@user.province_id).gst)
     @order.save
-    logger.debug(params[:order_id])
+    # logger.debug(params[:order_id])
     redirect_to order_items_create_path(order_id: @order.id, pst: @order.pst, hst: @order.hst, gst: @order.gst)
   end
 
