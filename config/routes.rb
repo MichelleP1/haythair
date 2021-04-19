@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   resources :furnitures do
     collection do
-      match 'search' => 'furniture#search', via: [:get, :post], as: :search
+      match 'search' => 'furnitures#search', via: [:get, :post], as: :search
     end
   end
 
