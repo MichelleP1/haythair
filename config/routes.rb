@@ -37,5 +37,11 @@ Rails.application.routes.draw do
     get "cancel", to: "checkout#cancel", as: "checkout_cancel"
   end
 
+  resources :furnitures do
+    collection do
+      match 'search' => 'furniture#search', via: [:get, :post], as: :search
+    end
+  end
+
   root to: "furnitures#index"
 end

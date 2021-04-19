@@ -69,3 +69,5 @@ gem "bulma-rails", "~> 0.8.0"
 gem 'kaminari'
 
 gem 'stripe'
+
+gem 'ransack', github: 'activerecord-hackery/ransack'

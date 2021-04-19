@@ -10,6 +10,7 @@ class Furniture < ApplicationRecord
   validates :category_id, numericality: { only_integer: true }, presence: true
 end
 
+
 # def self.filter(filter)
 #   if filter
 #     f = self.where('LOWER(furniture.title) LIKE ?', "sed%")

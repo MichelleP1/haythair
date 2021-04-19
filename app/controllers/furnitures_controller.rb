@@ -2,6 +2,8 @@ class FurnituresController < ApplicationController
   def index
     @furniture = Furniture.all.page(params[:page]).per(20)
     # @furniture = Kaminari.paginate_array(@furniture).page(params[:page]).per(5)
+    @q = Furniture.ransack(params[:q])
+    @furnitures = @q.result.page(params[:page]).per(20)
   end
 
   def show
@@ -11,4 +13,6 @@ class FurnituresController < ApplicationController
   # def search
   #   @horses = Horse.where("name LIKE ?", "%#{params[:search_term]}%")
   # end
+
+
 end

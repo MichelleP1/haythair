@@ -28,11 +28,11 @@
 
 <div class="columns is-multiline is-centered ml-6 mr-6 mt-6">
   <%= render partial: 'furniture',
-             collection: @furniture,
+             collection: @furnitures,
              locals: { show_link: true, show_details: false } %>
 </div>
 
 
 <div class="columns is-centered m-6">
-  <%= paginate @furniture %>
+  <%= paginate @furnitures %>
 </div>
