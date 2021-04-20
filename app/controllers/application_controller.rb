@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :initialize_session
+  before_action :set_search
   helper_method :cart, :get_categories, :subtotal, :pst, :hst, :gst
 
   protected
@@ -60,5 +61,10 @@ class ApplicationController < ActionController::Base
   def gst
     gst = Province.find(User.find(current_user.id).province_id).gst * 0.01
   end
+
+  def set_search
+    @q = Furniture.search(params[:q])
+  end
+
 
 end
