@@ -9,19 +9,22 @@
 
 
       <% cart.each do |furniture| %>
-        <%= form_with url: cart_path(Furniture.find(furniture[0]).id, :quantity), method: :put do %>
-          <h1 class="is-size-6 mb-4">
-            <%= Furniture.find(furniture[0]).title.titleize %> -
-            $<%= Furniture.find(furniture[0]).price * furniture[1] %>
-            <%= number_field_tag :quantity, value = furniture[1] %>
-            <%= button_tag 'Update', class: "button is-info is-light" %>
-          </h1>
-        <% end %>
+        <div class="mb-4">
+          <%= form_with url: cart_path(Furniture.find(furniture[0]).id, :quantity), method: :put do %>
+            <h1 class="is-size-6 mb-4">
+              <%= Furniture.find(furniture[0]).title.titleize %> -
+              $<%= Furniture.find(furniture[0]).price * furniture[1] %>
+              <%= number_field_tag :quantity, value = furniture[1] %>
+              <%= button_tag 'Update' %>
+            </h1>
+          <% end %>
 
-        <%= button_to cart_path(Furniture.find(furniture[0]).id), method: :delete do %>
-          Remove
-        <% end %>
+          <%= button_to cart_path(Furniture.find(furniture[0]).id), method: :delete do %>
+            Remove
+          <% end %>
+        </div>
       <% end %>
+
 
       <% if !@province.present? %>
         <h2>Please enter your address before submitting your order</h2>
