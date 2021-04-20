@@ -30,12 +30,24 @@
         </div>
       </div>
 
-      <div class="m-4 level-right is-pulled-right">
+
+      <div class="m-4 mt-5">
         <%= search_form_for @q, url: search_furnitures_path,
           html: { method: :post } do |f| %>
-        <%= f.text_field :title_or_description_cont, class: 'form-control' %>
 
-        <%= f.collection_select :category_id_eq, Category.all, :id, :title, { :include_blank => 'All Categories' }, {class: 'select is-primary', onchange: 'this.form.submit();' } %>
+          <div class="field-group">
+            <div class="field is-inline-block-desktop">
+              <div class="control">
+                <%= f.text_field :title_or_description_cont, class: 'input is-normal' %>
+              </div>
+            </div>
+
+            <div class="field is-inline-block-desktop">
+              <div class="control select is-info is-normal">
+                <%= f.collection_select :category_id_eq, Category.all, :id, :name_for_select, { :include_blank => 'All Categories' }, {onchange: 'this.form.submit();' } %>
+              </div>
+            </div>
+          </div>
 
         <% end %>
       </div>
@@ -43,7 +55,7 @@
       <div class="m-4 is-right">
         <ul>
           </li>
-            <%= link_to image_tag("cart.png", width:40), checkout_index_path %>
+            <%= link_to image_tag("cart.png", width:50), checkout_index_path %>
             <sup><%= cart.size %></sup>
           </li>
         </ul>
