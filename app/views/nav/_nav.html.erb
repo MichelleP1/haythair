@@ -35,8 +35,8 @@
           html: { method: :post } do |f| %>
         <%= f.text_field :title_or_description_cont, class: 'form-control' %>
 
-        <%= f.collection_select :category_id_eq, Category.all, :id, :title, { :include_blank => 'All Categories' }, {class: 'select is-primary' } %>
-        <%= f.submit class: 'button is-info is-outlined ml-3' %>
+        <%= f.collection_select :category_id_eq, Category.all, :id, :title, { :include_blank => 'All Categories' }, {class: 'select is-primary', onchange: 'this.form.submit();' } %>
+
         <% end %>
       </div>
 
@@ -49,7 +49,7 @@
         </ul>
       </div>
 
-      <p class="navbar-text float-right m-4">
+      <p class="navbar-text float-right m-4 navbar-end">
       <% if user_signed_in? %>
         <ul>
           <li class="mb-2 mt-3">
