@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :initialize_session
   before_action :set_search
-  helper_method :cart, :get_categories, :subtotal, :pst, :hst, :gst
+  helper_method :cart, :checkCart, :get_categories, :subtotal, :pst, :hst, :gst
 
   protected
   def configure_permitted_parameters
@@ -38,6 +38,16 @@ class ApplicationController < ActionController::Base
     end
 
     shopping_cart
+  end
+
+  def checkCart
+    shopping_cart = []
+    session[:shopping_cart].each do |furniture|
+      furnitureID = furniture[0]
+      shopping_cart << [furnitureID]
+    end
+
+    Furniture.find(shopping_cart)
   end
 
   def subtotal
