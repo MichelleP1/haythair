@@ -1,8 +1,10 @@
 <p>Payment sucessful! Please press continue to finalize your order.</p>
 
-<h3><%= @payment_intent.id %></h3>
-<h1>---------------------------------------------------------------</h1>
-<h3><%= @payment_intent.charges.data[0].paid %></h3>
-<h1>---------------------------------------------------------------</h1>
+<iframe id="existing-iframe-example"
+          width="1280" height="720"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&enablejsapi=1"
+          frameborder="0"
+          style="border: solid 4px #37474F"
+          ></iframe>
 
 <%= button_to "Continue", { :controller => "orders", :action => "create", :payment_id => @payment_intent.id, :payment_paid => @payment_intent.charges.data[0].paid} %>

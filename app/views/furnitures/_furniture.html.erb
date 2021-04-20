@@ -20,7 +20,7 @@
         </p>
       </div>
       <div>
-        <p class="is-size-3 mt-3">
+        <p class="is-size-3 mt-3 ">
             $<%= furniture.price %>
         </p>
       </div>
@@ -57,13 +57,13 @@
       <% end %>
       <div>
       <% if cart.include?(furniture) %>
-        <%= button_to cart_path(furniture), method: :delete do %>
+        <%= button_to cart_path(furniture), class: 'button is-info is-outlined ml-3', method: :delete do %>
           Remove From cart
         <% end %>
       <% else %>
         <%= form_with url: cart_index_path, method: :post do %>
           <%= hidden_field_tag(:id, furniture.id) %>
-          <%= button_tag 'Add to Cart' %>
+          <%= button_tag 'Add to Cart', class: 'button is-outlined mt-3 is-fullwidth' %>
         <% end %>
       <% end %>
       </div>

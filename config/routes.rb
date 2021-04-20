@@ -11,14 +11,6 @@ Rails.application.routes.draw do
   devise_for :users
   get 'furnitures/index'
   get 'furnitures/show'
-  # get 'categories/index'
-  # get 'categories/show'
-  # get 'furniture/index'
-  # get 'furniture/show'
-  # get 'furnitures/index'
-  # get 'furnitures/show'
-  # get 'products/index'
-  # get 'products/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -26,7 +18,6 @@ Rails.application.routes.draw do
   resources :furnitures, only: %i[index show]
   resources :categories, only: %i[index show]
   resources :cart, only: %i[create update destroy quantityIncrease quantityDecrease]
-  # resources :checkout
   resources :orders, only: %i[create]
   resources :order_items, only: %i[create]
   resources :users, only: %i[create, update]

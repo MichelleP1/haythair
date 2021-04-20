@@ -1,66 +1,73 @@
+<div class="columns is-centered mt-6 is-vcentered">
+  <div class="column box is-one-quarter">
+    <div class="is-centered m-6">
+      <% cart %>
+      <% session[:cart] %>
 
-<% cart %>
-<% session[:cart] %>
-
-<% if cart.present? %>
-<h1>Your Order</h1>
+      <% if cart.present? %>
+      <h1 class="is-size-1 mb-4">Order Summary</h1>
 
 
-<% cart.each do |furniture| %>
-  <%= form_with url: cart_path(Furniture.find(furniture[0]).id, :quantity), method: :put do %>
-    <h2>
-      <%= Furniture.find(furniture[0]).title %> -
-      $<%= Furniture.find(furniture[0]).price * furniture[1] %>
-      <%= number_field_tag :quantity, value = furniture[1] %>
-      <%= button_tag 'Update' %>
-    </h2>
-  <% end %>
+      <% cart.each do |furniture| %>
+        <%= form_with url: cart_path(Furniture.find(furniture[0]).id, :quantity), method: :put do %>
+          <h1 class="is-size-6 mb-4">
+            <%= Furniture.find(furniture[0]).title.titleize %> -
+            $<%= Furniture.find(furniture[0]).price * furniture[1] %>
+            <%= number_field_tag :quantity, value = furniture[1] %>
+            <%= button_tag 'Update', class: "button is-info is-light" %>
+          </h1>
+        <% end %>
 
-  <%= button_to cart_path(Furniture.find(furniture[0]).id), method: :delete do %>
-    Remove
-  <% end %>
-<% end %>
+        <%= button_to cart_path(Furniture.find(furniture[0]).id), method: :delete do %>
+          Remove
+        <% end %>
+      <% end %>
 
-<% if !@province.present? %>
-  <h2>Please enter your address before submitting your order</h2>
+      <% if !@province.present? %>
+        <h2>Please enter your address before submitting your order</h2>
 
-    <%= form_with url: user_path(current_user.id, :id, :address, :postal, :city), method: :put do |f| %>
+          <%= form_with url: user_path(current_user.id, :id, :address, :postal, :city), method: :put do |f| %>
 
-      <div class="field">
-        <%= f.label :address %><br />
-        <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-      </div>
+            <div class="field">
+              <%= f.label :address %><br />
+              <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+            </div>
 
-      <div class="field">
-        <%= f.label :postal %><br />
-        <%= f.text_field :postal, autofocus: true, autocomplete: "postal" %>
-      </div>
+            <div class="field">
+              <%= f.label :postal %><br />
+              <%= f.text_field :postal, autofocus: true, autocomplete: "postal" %>
+            </div>
 
-      <div class="field">
-        <%= f.label :city %><br />
-        <%= f.text_field :city, autofocus: true, autocomplete: "city" %>
-      </div>
+            <div class="field">
+              <%= f.label :city %><br />
+              <%= f.text_field :city, autofocus: true, autocomplete: "city" %>
+            </div>
 
-      <div class="field">
-        <%= f.label :province %><br />
-        <%= f.collection_select :province_id, Province.all, :id, :code, { :prompt => 'Select a Province' }, {class: 'form-control' } %>
-      </div>
+            <div class="field">
+              <%= f.label :province %><br />
+              <%= f.collection_select :province_id, Province.all, :id, :code, { :prompt => 'Select a Province' }, {class: 'form-control' } %>
+            </div>
 
-      <%= button_tag 'Update' %>
-    <% end %>
+            <%= button_tag 'Update' %>
+          <% end %>
 
-  <% else %>
+        <% else %>
 
-    <h2>Subtotal: $<%= subtotal.round(2) %></h2>
-    <h2>PST: $<%= (subtotal * pst).round(2) %></h2>
-    <h2>HST: $<%= (subtotal * hst).round(2) %></h2>
-    <h2>GST: $<%= (subtotal * gst).round(2) %></h2>
-    <h2>Total: $<%= (subtotal + (subtotal * pst) + (subtotal * hst) + (subtotal * gst)).round(2) %></h2>
+          <div class="mt-4">
+            <h2 class="has-text-weight-semibold">Subtotal: $<%= subtotal.round(2) %></h2>
+            <h2>PST: $<%= (subtotal * pst).round(2) %></h2>
+            <h2>HST: $<%= (subtotal * hst).round(2) %></h2>
+            <h2>GST: $<%= (subtotal * gst).round(2) %></h2>
+            <h2 class="has-text-weight-bold mb-4">Total: $<%= (subtotal + (subtotal * pst) + (subtotal * hst) + (subtotal * gst)).round(2) %></h2>
 
-    <td><%= button_to 'Submit Order' ,{:controller => 'checkout', :action => 'create', :pst => pst, :hst => hst, :gst => gst}, {:method => :post, :remote => true} %></td>
+            <td><%= button_to 'Submit Order' ,{:controller => 'checkout', :action => 'create', :pst => pst, :hst => hst, :gst => gst}, {:method => :post, :remote => true} %></td>
 
-<% end %>
+          </div>
+      <% end %>
 
-<% else %>
-  <h2>Your cart is empty.</h2>
-<% end %>
+      <% else %>
+        <h2>Your cart is empty.</h2>
+      <% end %>
+    </div>
+  </div>
+</div>
