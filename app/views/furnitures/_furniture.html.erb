@@ -57,7 +57,7 @@
       <% end %>
       <div>
       <% if checkCart.include?(furniture) %>
-        <%= button_to cart_path(furniture), class: 'button is-info is-outlined ml-3', method: :delete do %>
+        <%= button_to cart_path(furniture), class: 'button is-info mt-3 is-fullwidth', method: :delete do %>
           Remove From cart
         <% end %>
       <% else %>
