@@ -29,7 +29,7 @@ class CartController < ApplicationController
     # session[:shopping_cart].delete(id)
     furniture = Furniture.find(id)
     flash[:notice] = "- Removed #{furniture.title} from the cart."
-    redirect_to checkout_index_path
+    redirect_to root_path
   end
 
   def quantityIncrease
