@@ -48,9 +48,9 @@
         <%= search_form_for @q, url: search_furnitures_path,
           html: { method: :post } do |f| %>
         <%= f.label :name %>
-        <%= f.text_field :title_cont, class: 'form-control' %>
+        <%= f.text_field :title_or_description_cont, class: 'form-control' %>
 
-        <%= f.collection_select :category_id_eq, Category.all, :id, :title, { :prompt => 'Select a Category' }, {class: 'form-control' } %>
+        <%= f.collection_select :category_id_eq, Category.all, :id, :title, { :include_blank => 'All Categories' }, {class: 'form-control' } %>
         <%= f.submit class: 'btn btn-primary' %>
         <% end %>
       </div>
