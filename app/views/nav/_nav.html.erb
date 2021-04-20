@@ -60,21 +60,33 @@
         </ul>
       </div>
 
-      <p class="navbar-text ml-6 mr-6">
+
+      <div class="dropdown is-hoverable m-5">
         <% if user_signed_in? %>
-          <ul>
-            <li class="mb-2 mt-3">
-              <%= link_to current_user.email, edit_user_registration_path %>
-            </li>
-            <span>
-            <li>
-              <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
-            </li>
-          </ul>
+
+          <div class="dropdown-trigger">
+            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+              <span>Hello, <%= current_user.email %></span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item">
+                <h1 class= "is-size-6 m-3"><%= link_to "Account Settings", edit_user_registration_path %></h1>
+                <h1 class= "is-size-6 m-3"><%= link_to "Logout", destroy_user_session_path, method: :delete  %></h1>
+              </div>
+            </div>
+          </div>
+
         <% else %>
+
           <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+
         <% end %>
-      </p>
+      </div>
 
     </div>
   </div>
