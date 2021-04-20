@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'orders/index'
   get 'orders/show'
   get 'checkout/index'
-  get 'checkout/show'
+
   devise_for :users
   get 'furnitures/index'
   get 'furnitures/show'

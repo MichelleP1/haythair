@@ -14,31 +14,30 @@
         Haythair Furniture
       </a>
 
-      <div class="navbar-item has-dropdown is-hoverable m-4">
+      <div class="navbar-item has-dropdown is-hoverable m-4 box ml-6 mr-6">
         <a class="navbar-link">
           Categories
         </a>
 
-        <div class="navbar-dropdown ml-4 mr-4">
+        <div class="navbar-dropdown">
           <% get_categories.each do |f| %>
-            <div id=<%= "box#{f.id}" -%> >
-            <a class="navbar-item ml-4 mr-4">
-              <%= link_to f.title, f %>
+            <a class="navbar-item">
+              <%= link_to f.title.titleize, f %>
             </a>
-            </div>
           <% end %>
         </div>
       </div>
 
 
-      <div class="m-4 mt-5">
+
+      <div class="m-4 mt-5 ml-6 mr-6">
         <%= search_form_for @q, url: search_furnitures_path,
           html: { method: :post } do |f| %>
 
           <div class="field-group">
             <div class="field is-inline-block-desktop">
               <div class="control">
-                <%= f.text_field :title_or_description_cont, class: 'input is-normal' %>
+                <%= f.text_field :title_or_description_cont, :size=>"35",  class: 'input is-normal' %>
               </div>
             </div>
 
@@ -52,7 +51,7 @@
         <% end %>
       </div>
 
-      <div class="m-4 is-right">
+      <div class="m-4 is-right ml-6 mr-6">
         <ul>
           </li>
             <%= link_to image_tag("cart.png", width:50), checkout_index_path %>
@@ -61,20 +60,20 @@
         </ul>
       </div>
 
-      <p class="navbar-text float-right m-4 navbar-end">
-      <% if user_signed_in? %>
-        <ul>
-          <li class="mb-2 mt-3">
-            <%= link_to current_user.email, edit_user_registration_path %>
-          </li>
-          <span>
-          <li>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
-          </li>
-        </ul>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-      <% end %>
+      <p class="navbar-text ml-6 mr-6">
+        <% if user_signed_in? %>
+          <ul>
+            <li class="mb-2 mt-3">
+              <%= link_to current_user.email, edit_user_registration_path %>
+            </li>
+            <span>
+            <li>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
+            </li>
+          </ul>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+        <% end %>
       </p>
 
     </div>
